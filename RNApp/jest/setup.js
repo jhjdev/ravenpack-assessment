@@ -1,28 +1,11 @@
-// Jest setup file
+// Mock global variables used by React Native
+global.window = {};
+global.navigator = { product: 'ReactNative' };
+global.requestAnimationFrame = function(callback) {
+  return setTimeout(callback, 0);
+};
+global.cancelAnimationFrame = function(id) {
+  clearTimeout(id);
+};
 
-// Mock React Native's StyleSheet
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-  
-  return {
-    ...RN,
-    StyleSheet: {
-      ...RN.StyleSheet,
-      create: jest.fn((styles) => styles),
-      hairlineWidth: 1,
-      absoluteFill: {},
-      flatten: jest.fn(styles => styles),
-    },
-  };
-});
-
-// Mock App
-jest.mock('App', () => 'App');
-
-// Setup other global mocks if needed
-global.fetch = jest.fn(() => 
-  Promise.resolve({
-    ok: true,
-    json: () => Promise.resolve({}),
-  })
-);
+// Add any other setup code here

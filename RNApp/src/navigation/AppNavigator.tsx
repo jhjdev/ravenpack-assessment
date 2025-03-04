@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from '../contexts/ThemeContext';
 import { theme as themeColors } from '../styles/theme';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Feather';
 
 // Import actual screen components
 import HomeScreen from '../screens/HomeScreen';
@@ -19,17 +19,18 @@ const AppNavigator = () => {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
+            let iconName = 'help-circle';
+            
             if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
+              iconName = 'home';
             } else if (route.name === 'About') {
-              iconName = focused ? 'information-circle' : 'information-circle-outline';
+              iconName = 'info';
             } else if (route.name === 'Settings') {
-              iconName = focused ? 'settings' : 'settings-outline';
+              iconName = 'settings';
             }
-
-            return <Ionicons name={iconName || 'help-circle'} size={size} color={color} />;
+            
+            // Render the icon
+            return <Icon name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: theme.accent,
           tabBarInactiveTintColor: theme.textSecondary,
@@ -51,4 +52,3 @@ const AppNavigator = () => {
 };
 
 export default AppNavigator;
-

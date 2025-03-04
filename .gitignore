@@ -1,0 +1,61 @@
+# OSX
+#
+.DS_Store
+
+# React Native
+#
+RNApp/node_modules/
+RNApp/.pnp
+RNApp/.pnp.js
+RNApp/.pnpm-store/
+
+# testing
+RNApp/coverage
+
+# production
+RNApp/build/
+RNApp/dist/
+
+# misc
+RNApp/.env
+RNApp/.env.local
+RNApp/.env.development.local
+RNApp/.env.test.local
+RNApp/.env.production.local
+
+# debug logs
+RNApp/npm-debug.log*
+RNApp/yarn-debug.log*
+RNApp/yarn-error.log*
+RNApp/pnpm-debug.log*
+
+# iOS
+RNApp/ios/Pods/
+RNApp/ios/build/
+RNApp/ios/Podfile.lock
+RNApp/ios/*.xcworkspace
+RNApp/ios/*.xcuserstate
+RNApp/ios/tmp.xcconfig
+RNApp/vendor/
+
+# Android
+RNApp/android/app/build/
+RNApp/android/.gradle
+RNApp/android/build/
+RNApp/android/local.properties
+RNApp/android/.idea/
+RNApp/android/*.iml
+RNApp/android/app/debug/
+RNApp/android/app/release/
+RNApp/android/captures/
+RNApp/android/app/src/main/assets/index.android.bundle
+RNApp/android/app/src/main/assets/index.android.bundle.meta
+RNApp/android/app/src/main/res/drawable-*/
+
+# Caches
+.cache/
+.eslintcache
+.idea/
+.vscode/
+*.swp
+*.swo
