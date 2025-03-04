@@ -59,3 +59,5 @@ RNApp/android/app/src/main/res/drawable-*/
 .vscode/
 *.swp
 *.swo
+# react-native node modules
+react-native/
