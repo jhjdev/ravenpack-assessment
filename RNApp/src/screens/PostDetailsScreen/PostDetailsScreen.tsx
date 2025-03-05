@@ -8,14 +8,13 @@ import {
   RefreshControl,
   TouchableOpacity,
 } from 'react-native';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useQuery} from '@tanstack/react-query';
-import {format} from 'date-fns';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useQuery } from '@tanstack/react-query';
 
-import {apiService, getPost, getCommentsForPost, getUser} from '../../services/api';
-import {useTheme} from '../../contexts/ThemeContext';
-import {theme as themeColors, commonStyles} from '../../styles/theme';
+import { getPost, getCommentsForPost, getUser } from '../../services/api';
+import { useTheme } from '../../contexts/ThemeContext';
+import { theme as themeColors } from '../../styles/theme';
 
 type PostDetailsRouteParams = {
   PostDetails: {
@@ -27,9 +26,9 @@ type PostDetailsScreenRouteProp = RouteProp<PostDetailsRouteParams, 'PostDetails
 
 export const PostDetailsScreen: React.FC = () => {
   const route = useRoute<PostDetailsScreenRouteProp>();
-  const {postId} = route.params;
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const {currentTheme, isDarkMode} = useTheme();
+  const { postId } = route.params;
+  const navigation = useNavigation<NativeStackNavigationProp<PostDetailsRouteParams>>();
+  const { currentTheme } = useTheme();
   const theme = themeColors[currentTheme];
 
   const {
@@ -70,28 +69,28 @@ export const PostDetailsScreen: React.FC = () => {
   };
 
   const navigateToUserPosts = (userId: number) => {
-    navigation.navigate('UserPosts', {userId});
+    navigation.navigate('UserPosts', { userId });
   };
 
   if (isPostLoading || isCommentsLoading) {
     return (
-      <View style={[styles.loadingContainer, {backgroundColor: theme.background}]}>
+      <View style={[styles.loadingContainer, { backgroundColor: theme.background }]}>
         <ActivityIndicator size="large" color={theme.accent} />
-        <Text style={[styles.loadingText, {color: theme.text}]}>Loading post details...</Text>
+        <Text style={[styles.loadingText, { color: theme.text }]}>Loading post details...</Text>
       </View>
     );
   }
 
   if (isPostError || isCommentsError) {
     return (
-      <View style={[styles.errorContainer, {backgroundColor: theme.background}]}>
-        <Text style={[styles.errorText, {color: 'red'}]}>
+      <View style={[styles.errorContainer, { backgroundColor: theme.background }]}>
+        <Text style={[styles.errorText, { color: theme.error }]}>
           Error loading post: {(postError as Error)?.message || (commentsError as Error)?.message}
         </Text>
         <TouchableOpacity
-          style={[styles.retryButton, {backgroundColor: theme.accent}]}
+          style={[styles.retryButton, { backgroundColor: theme.accent }]}
           onPress={handleRefresh}>
-          <Text style={[styles.retryButtonText, {color: 'white'}]}>Retry</Text>
+          <Text style={[styles.retryButtonText, { color: theme.background }]}>Retry</Text>
         </TouchableOpacity>
       </View>
     );
@@ -99,7 +98,7 @@ export const PostDetailsScreen: React.FC = () => {
 
   return (
     <ScrollView
-      style={[styles.container, {backgroundColor: theme.background}]}
+      style={[styles.container, { backgroundColor: theme.background }]}
       refreshControl={
         <RefreshControl
           refreshing={isPostLoading || isCommentsLoading}
@@ -110,34 +109,34 @@ export const PostDetailsScreen: React.FC = () => {
       }>
       {post && (
         <View style={styles.postContainer}>
-          <Text style={[styles.postTitle, {color: theme.text}]}>{post.title}</Text>
+          <Text style={[styles.postTitle, { color: theme.text }]}>{post.title}</Text>
           {user && !isUserLoading && !isUserError && (
             <TouchableOpacity onPress={() => navigateToUserPosts(user.id)}>
-              <Text style={[styles.userInfo, {color: theme.accent}]}>
+              <Text style={[styles.userInfo, { color: theme.accent }]}>
                 By: {user.name} (@{user.username})
               </Text>
             </TouchableOpacity>
           )}
-          <Text style={[styles.postBody, {color: theme.text}]}>{post.body}</Text>
+          <Text style={[styles.postBody, { color: theme.text }]}>{post.body}</Text>
         </View>
       )}
 
       <View style={styles.commentsSection}>
-        <Text style={[styles.commentsTitle, {color: theme.text}]}>
+        <Text style={[styles.commentsTitle, { color: theme.text }]}>
           Comments ({comments?.length || 0})
         </Text>
         {comments && comments.length > 0 ? (
           comments.map(comment => (
-            <View key={comment.id} style={[styles.commentContainer, {borderColor: theme.border}]}>
-              <Text style={[styles.commentName, {color: theme.text}]}>{comment.name}</Text>
-              <Text style={[styles.commentEmail, {color: theme.textSecondary}]}>
+            <View key={comment.id} style={[styles.commentContainer, { borderColor: theme.border }]}>
+              <Text style={[styles.commentName, { color: theme.text }]}>{comment.name}</Text>
+              <Text style={[styles.commentEmail, { color: theme.textSecondary }]}>
                 {comment.email}
               </Text>
-              <Text style={[styles.commentBody, {color: theme.text}]}>{comment.body}</Text>
+              <Text style={[styles.commentBody, { color: theme.text }]}>{comment.body}</Text>
             </View>
           ))
         ) : (
-          <Text style={[styles.noCommentsText, {color: theme.textSecondary}]}>
+          <Text style={[styles.noCommentsText, { color: theme.textSecondary }]}>
             No comments found for this post.
           </Text>
         )}

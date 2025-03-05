@@ -28,7 +28,7 @@ module.exports = {
     'react-native/no-unused-styles': 'warn',
     'react-native/no-inline-styles': 'warn',
     'react-native/no-color-literals': 'warn',
-    'react-native/no-raw-text': ['warn', {skip: ['ThemedText']}],
+    'react-native/no-raw-text': ['warn', { skip: ['ThemedText'] }],
 
     // React hooks rules
     'react-hooks/rules-of-hooks': 'error',
@@ -38,11 +38,11 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/no-unused-vars': ['warn', {argsIgnorePattern: '^_'}],
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-empty-interface': 'warn',
     '@typescript-eslint/no-empty-function': 'warn',
     // General code quality rules
-    'no-console': ['warn', {allow: ['warn', 'error', 'info']}],
+    'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
     'no-duplicate-imports': 'error',
     'no-unused-expressions': 'warn',
     'no-unused-vars': 'off', // Turned off in favor of @typescript-eslint/no-unused-vars
@@ -59,9 +59,9 @@ module.exports = {
     '@typescript-eslint/no-unsafe-argument': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/unbound-method': 'off',
-    eqeqeq: ['error', 'always', {null: 'ignore'}],
-    quotes: ['warn', 'single', {avoidEscape: true}],
-    'max-len': ['warn', {code: 100, ignoreComments: true, ignoreStrings: true}],
+    eqeqeq: ['error', 'always', { null: 'ignore' }],
+    quotes: ['warn', 'single', { avoidEscape: true }],
+    'max-len': ['warn', { code: 100, ignoreComments: true, ignoreStrings: true }],
     'prettier/prettier': 'warn',
     'no-trailing-spaces': 'warn',
     'object-curly-spacing': ['warn', 'always'],
@@ -83,8 +83,8 @@ module.exports = {
       files: ['metro.config.js', '*.config.js'],
       rules: {
         '@typescript-eslint/no-require-imports': 'off',
-        '@typescript-eslint/no-var-requires': 'off'
-      }
+        '@typescript-eslint/no-var-requires': 'off',
+      },
     },
   ],
 };

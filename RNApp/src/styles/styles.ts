@@ -1,4 +1,4 @@
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
 // Color palettes
 const colors = {
@@ -110,21 +110,21 @@ const shadows = {
   light: {
     small: {
       shadowColor: '#000',
-      shadowOffset: {width: 0, height: 1},
+      shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.18,
       shadowRadius: 1.0,
       elevation: 1,
     },
     medium: {
       shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2},
+      shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.22,
       shadowRadius: 2.22,
       elevation: 3,
     },
     large: {
       shadowColor: '#000',
-      shadowOffset: {width: 0, height: 4},
+      shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 4.65,
       elevation: 8,
@@ -133,21 +133,21 @@ const shadows = {
   dark: {
     small: {
       shadowColor: '#000',
-      shadowOffset: {width: 0, height: 1},
+      shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.3,
       shadowRadius: 2.0,
       elevation: 2,
     },
     medium: {
       shadowColor: '#000',
-      shadowOffset: {width: 0, height: 3},
+      shadowOffset: { width: 0, height: 3 },
       shadowOpacity: 0.4,
       shadowRadius: 3.84,
       elevation: 5,
     },
     large: {
       shadowColor: '#000',
-      shadowOffset: {width: 0, height: 5},
+      shadowOffset: { width: 0, height: 5 },
       shadowOpacity: 0.5,
       shadowRadius: 6.27,
       elevation: 10,
@@ -246,7 +246,7 @@ export const createThemedStyles =
   };
 
 // Export constants and styles
-export {colors, typography, spacing, borderRadius, shadows, animation, commonStyles};
+export { colors, typography, spacing, borderRadius, shadows, animation, commonStyles };
 
 // Type for our theme
 export type Theme = typeof lightTheme;

@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, Linking, TouchableOpacity} from 'react-native';
-import {useTheme} from '../../contexts/ThemeContext';
-import {theme as themeColors, commonStyles} from '../../styles/theme';
+import { View, Text, StyleSheet, ScrollView, Linking, TouchableOpacity } from 'react-native';
+import { useTheme } from '../../contexts/ThemeContext';
+import { theme as themeColors, commonStyles } from '../../styles/theme';
 
 type TechnologyItemProps = {
   name: string;
@@ -9,8 +9,8 @@ type TechnologyItemProps = {
   url: string;
 };
 
-const TechnologyItem: React.FC<TechnologyItemProps> = ({name, description, url}) => {
-  const {currentTheme} = useTheme();
+const TechnologyItem: React.FC<TechnologyItemProps> = ({ name, description, url }) => {
+  const { currentTheme } = useTheme();
   const theme = themeColors[currentTheme];
   const handlePress = async () => {
     const supported = await Linking.canOpenURL(url);
@@ -21,16 +21,24 @@ const TechnologyItem: React.FC<TechnologyItemProps> = ({name, description, url})
 
   return (
     <TouchableOpacity
-      style={[styles.techItem, {backgroundColor: theme.cardBackground}]}
+      style={[
+        styles.techItem,
+        {
+          backgroundColor: theme.cardBackground,
+          shadowColor: theme.text,
+        },
+      ]}
       onPress={handlePress}>
-      <Text style={[styles.techName, {color: theme.accent}]}>{name}</Text>
-      <Text style={[styles.techDescription, {color: theme.text}]}>{description}</Text>
+      <Text style={[styles.techName, styles.techNameText, { color: theme.accent }]}>{name}</Text>
+      <Text style={[styles.techDescription, styles.techDescriptionText, { color: theme.text }]}>
+        {description}
+      </Text>
     </TouchableOpacity>
   );
 };
 
 const AboutScreen: React.FC = () => {
-  const {currentTheme} = useTheme();
+  const { currentTheme } = useTheme();
   const theme = themeColors[currentTheme];
   const technologies: TechnologyItemProps[] = [
     {
@@ -81,15 +89,24 @@ const AboutScreen: React.FC = () => {
   ];
 
   return (
-    <View style={[commonStyles.screenContainer, {backgroundColor: theme.background}]}>
-      <Text style={[commonStyles.title, {color: theme.text}]}>About This App</Text>
+    <View
+      style={[
+        commonStyles.screenContainer,
+        styles.container,
+        { backgroundColor: theme.background },
+      ]}>
+      <Text style={[commonStyles.title, styles.titleText, { color: theme.text }]}>
+        About This App
+      </Text>
 
-      <Text style={[styles.description, {color: theme.text}]}>
+      <Text style={[styles.description, styles.descriptionText, { color: theme.text }]}>
         This is a simple blog post reading application created with React Native that uses the
         JSONPlaceholder API.
       </Text>
 
-      <Text style={[commonStyles.subtitle, {color: theme.text}]}>Technologies Used</Text>
+      <Text style={[commonStyles.subtitle, styles.subtitleText, { color: theme.text }]}>
+        Technologies Used
+      </Text>
 
       <ScrollView style={styles.techList}>
         {technologies.map((tech, index) => (
@@ -97,7 +114,7 @@ const AboutScreen: React.FC = () => {
         ))}
       </ScrollView>
 
-      <Text style={[styles.footer, {color: theme.textSecondary}]}>
+      <Text style={[styles.footer, styles.footerText, { color: theme.textSecondary }]}>
         Tap on any technology to learn more about it.
       </Text>
     </View>
@@ -105,10 +122,16 @@ const AboutScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   description: {
     fontSize: 16,
     lineHeight: 22,
     marginBottom: 24,
+  },
+  descriptionText: {
+    textAlign: 'left',
   },
   footer: {
     fontSize: 14,
@@ -116,17 +139,25 @@ const styles = StyleSheet.create({
     marginTop: 8,
     textAlign: 'center',
   },
+  footerText: {
+    fontStyle: 'italic',
+  },
+  subtitleText: {
+    marginVertical: 10,
+  },
   techDescription: {
     fontSize: 14,
     lineHeight: 20,
+  },
+  techDescriptionText: {
+    fontWeight: 'normal',
   },
   techItem: {
     borderRadius: 8,
     elevation: 2,
     marginBottom: 12,
     padding: 16,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
   },
@@ -138,6 +169,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 4,
+  },
+  techNameText: {
+    textTransform: 'none',
+  },
+  titleText: {
+    marginBottom: 16,
   },
 });
 

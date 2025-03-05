@@ -1,4 +1,4 @@
-import {apiService} from '../../src/services/api';
+import { apiService } from '../../src/services/api';
 
 describe('API Service', () => {
   // Basic structure tests - verify all required methods exist
@@ -62,7 +62,8 @@ describe('API Service', () => {
         await apiService.getPosts();
         // If we get here without an error, it means the service is handling errors properly
         expect(true).toBe(true);
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_error) {
         // If the service throws an uncaught error, this test will fail
         fail('API service should handle errors gracefully');
       }

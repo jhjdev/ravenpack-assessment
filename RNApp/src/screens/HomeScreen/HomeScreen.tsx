@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import {
   View,
   Text,
@@ -9,23 +9,48 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import {useQuery} from '@tanstack/react-query';
-import {useNavigation} from '@react-navigation/native';
-import {useTheme} from '../../contexts/ThemeContext';
-import {apiService, Post} from '../../services/api';
-import {
-  createThemedStyles,
-  typography,
-  spacing,
-  borderRadius,
-  commonStyles,
-} from '../../styles/styles';
+import { useQuery } from '@tanstack/react-query';
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '../../contexts/ThemeContext';
+import { apiService, Post } from '../../services/api';
+import { createThemedStyles, typography, spacing, borderRadius } from '../../styles/styles';
+
+/* eslint-disable react-native/no-unused-styles */
+
+// Type definition for styles prop
+interface StyledComponentProps {
+  styles: ReturnType<typeof themedStyles>;
+}
+
+// Loading header component extracted to avoid defining components during render
+const LoadingHeader = ({
+  isLoading,
+  styles,
+}: {
+  isLoading: boolean;
+  styles: ReturnType<typeof themedStyles>;
+}) => {
+  if (!isLoading) return null;
+
+  return (
+    <View style={styles.loadingContainer}>
+      <ActivityIndicator size="large" color={styles.loadingIndicator.color} />
+      <Text style={styles.loadingText}>Loading posts...</Text>
+    </View>
+  );
+};
+
+// Separator component extracted to avoid defining components during render
+const ItemSeparator = ({ styles }: StyledComponentProps) => <View style={styles.separator} />;
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const {currentTheme} = useTheme();
+  const { currentTheme } = useTheme();
   const isDarkTheme = currentTheme === 'dark';
   const styles = themedStyles(isDarkTheme);
+
+  // Memoize the ItemSeparatorComponent to prevent unstable rendering
+  const renderItemSeparator = useCallback(() => <ItemSeparator styles={styles} />, [styles]);
 
   // Fetch posts using TanStack Query
   const {
@@ -47,21 +72,23 @@ const HomeScreen = () => {
 
   // Navigate to post details
   const navigateToPostDetails = (post: Post) => {
-    navigation.navigate('PostDetails', {postId: post.id});
+    navigation.navigate('PostDetails', { postId: post.id });
     // Also log for debugging purposes
-    console.log('Navigate to post details', post.id);
+    // Log for debugging purposes (consider using a dedicated logging library in production)
+    // console.log('Navigate to post details', post.id);
   };
 
   // Navigate to user's posts
   const navigateToUserPosts = (userId: number) => {
     // Only pass userId to UserPostsScreen - let it handle fetching user details
-    navigation.navigate('UserPosts', {userId});
+    navigation.navigate('UserPosts', { userId });
     // Also log for debugging purposes
-    console.log('Navigate to user posts', userId);
+    // Log for debugging purposes (consider using a dedicated logging library in production)
+    // console.log('Navigate to user posts', userId);
   };
 
   // Render individual post item
-  const renderPostItem = ({item}: {item: Post}) => (
+  const renderPostItem = ({ item }: { item: Post }) => (
     <TouchableOpacity
       style={styles.postCard}
       onPress={() => navigateToPostDetails(item)}
@@ -123,7 +150,7 @@ const HomeScreen = () => {
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.listContent}
         ListEmptyComponent={!isLoading && renderEmptyList()}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        ItemSeparatorComponent={renderItemSeparator}
         refreshControl={
           <RefreshControl
             refreshing={isFetching}
@@ -133,32 +160,25 @@ const HomeScreen = () => {
             progressBackgroundColor={styles.refreshProgressBackground.backgroundColor}
           />
         }
-        ListHeaderComponent={
-          isLoading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color={styles.loadingIndicator.color} />
-              <Text style={styles.loadingText}>Loading posts...</Text>
-            </View>
-          ) : null
-        }
+        ListHeaderComponent={<LoadingHeader isLoading={isLoading} styles={styles} />}
       />
     </View>
   );
 };
 
 // Create theme-specific styles
-const themedStyles = createThemedStyles((theme, commonStyles) =>
+const themedStyles = createThemedStyles((theme, themeCommonStyles) =>
   StyleSheet.create({
     authorButton: {
       paddingHorizontal: spacing.sm,
       paddingVertical: spacing.xs,
     },
     container: {
-      ...commonStyles.container,
+      ...themeCommonStyles.container,
       backgroundColor: theme.colors.background,
     },
     emptyContainer: {
-      ...commonStyles.center,
+      ...themeCommonStyles.center,
       padding: spacing.xl,
     },
     emptyText: {
@@ -167,8 +187,8 @@ const themedStyles = createThemedStyles((theme, commonStyles) =>
       marginBottom: spacing.md,
     },
     errorContainer: {
-      ...commonStyles.container,
-      ...commonStyles.center,
+      ...themeCommonStyles.container,
+      ...themeCommonStyles.center,
       backgroundColor: theme.colors.background,
       padding: spacing.xl,
     },
@@ -180,8 +200,7 @@ const themedStyles = createThemedStyles((theme, commonStyles) =>
     },
     errorTitle: {
       color: theme.colors.error,
-      fontSize: typography.fontSize.xl,
-      fontWeight: typography.fontWeight.bold as any,
+      fontWeight: typography.fontWeight.bold,
       marginBottom: spacing.sm,
     },
     listContent: {
@@ -189,7 +208,7 @@ const themedStyles = createThemedStyles((theme, commonStyles) =>
       paddingBottom: spacing.xxxl,
     },
     loadingContainer: {
-      ...commonStyles.center,
+      ...themeCommonStyles.center,
       padding: spacing.xl,
     },
     loadingIndicator: {
@@ -207,7 +226,7 @@ const themedStyles = createThemedStyles((theme, commonStyles) =>
       marginBottom: spacing.md,
     },
     postCard: {
-      ...commonStyles.card,
+      ...themeCommonStyles.card,
       backgroundColor: theme.colors.surface,
       borderColor: theme.colors.border,
       borderRadius: borderRadius.lg,
@@ -218,7 +237,7 @@ const themedStyles = createThemedStyles((theme, commonStyles) =>
       padding: spacing.md,
     },
     postFooter: {
-      ...commonStyles.row,
+      ...themeCommonStyles.row,
       borderTopColor: theme.colors.border,
       borderTopWidth: 1,
       justifyContent: 'space-between',
@@ -227,8 +246,7 @@ const themedStyles = createThemedStyles((theme, commonStyles) =>
     },
     postTitle: {
       color: theme.colors.text.primary,
-      fontSize: typography.fontSize.lg,
-      fontWeight: typography.fontWeight.bold as any,
+      fontWeight: typography.fontWeight.bold,
       marginBottom: spacing.sm,
     },
     readMoreButton: {
@@ -238,9 +256,8 @@ const themedStyles = createThemedStyles((theme, commonStyles) =>
       paddingVertical: spacing.xs,
     },
     readMoreText: {
-      color: '#FFFFFF',
-      fontSize: typography.fontSize.sm,
-      fontWeight: typography.fontWeight.medium as any,
+      color: theme.colors.surface,
+      fontWeight: typography.fontWeight.medium,
     },
     refreshColor: {
       color: theme.colors.primary,
@@ -255,17 +272,15 @@ const themedStyles = createThemedStyles((theme, commonStyles) =>
       paddingVertical: spacing.sm,
     },
     retryButtonText: {
-      color: '#FFFFFF',
-      fontSize: typography.fontSize.md,
-      fontWeight: typography.fontWeight.medium as any,
+      color: theme.colors.surface,
+      fontWeight: typography.fontWeight.medium,
     },
     separator: {
       height: spacing.md,
     },
     userLink: {
       color: theme.colors.primary,
-      fontSize: typography.fontSize.sm,
-      fontWeight: typography.fontWeight.medium as any,
+      fontWeight: typography.fontWeight.medium,
     },
   }),
 );

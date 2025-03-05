@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, Switch, Pressable} from 'react-native';
-import {useTheme, type ThemeType} from '../../contexts/ThemeContext';
-import {theme as themeColors} from '../../styles/theme';
+import { View, Text, StyleSheet, Switch, Pressable } from 'react-native';
+import { useTheme } from '../../contexts/ThemeContext';
+import { theme as themeColors } from '../../styles/theme';
 
 type ThemeOptionProps = {
   title: string;
@@ -9,8 +9,8 @@ type ThemeOptionProps = {
   onSelect: () => void;
 };
 
-const ThemeOption: React.FC<ThemeOptionProps> = ({title, isSelected, onSelect}) => {
-  const {currentTheme} = useTheme();
+const ThemeOption: React.FC<ThemeOptionProps> = ({ title, isSelected, onSelect }) => {
+  const { currentTheme } = useTheme();
   const theme = themeColors[currentTheme];
 
   return (
@@ -18,10 +18,19 @@ const ThemeOption: React.FC<ThemeOptionProps> = ({title, isSelected, onSelect}) 
       style={[
         styles.themeOption,
         isSelected && styles.selectedOption,
-        {backgroundColor: isSelected ? theme.accent : theme.cardBackground},
+        {
+          backgroundColor: isSelected ? theme.accent : theme.cardBackground,
+          ...(isSelected && {
+            elevation: 2,
+            shadowColor: theme.text,
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.1,
+            shadowRadius: 3,
+          }),
+        },
       ]}
       onPress={onSelect}>
-      <Text style={[styles.themeOptionText, {color: isSelected ? theme.background : theme.text}]}>
+      <Text style={[styles.themeOptionText, { color: isSelected ? theme.background : theme.text }]}>
         {title}
       </Text>
     </Pressable>
@@ -29,16 +38,16 @@ const ThemeOption: React.FC<ThemeOptionProps> = ({title, isSelected, onSelect}) 
 };
 
 const SettingsScreen: React.FC = () => {
-  const {theme: themeMode, currentTheme, setTheme} = useTheme();
+  const { theme: themeMode, currentTheme, setTheme } = useTheme();
   const isSystemTheme = themeMode === 'system';
   const theme = themeColors[currentTheme];
 
   return (
-    <View style={[styles.container, {backgroundColor: theme.background}]}>
-      <Text style={[styles.title, {color: theme.text}]}>Theme Settings</Text>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <Text style={[styles.title, { color: theme.text }]}>Theme Settings</Text>
 
       <View style={styles.optionsContainer}>
-        <Text style={[styles.sectionTitle, {color: theme.text}]}>Choose Theme</Text>
+        <Text style={[styles.sectionTitle, { color: theme.text }]}>Choose Theme</Text>
 
         <View style={styles.themeOptions}>
           <ThemeOption
@@ -55,17 +64,17 @@ const SettingsScreen: React.FC = () => {
         </View>
 
         <View style={styles.systemThemeContainer}>
-          <Text style={[styles.systemThemeText, {color: theme.text}]}>Use System Theme</Text>
+          <Text style={[styles.systemThemeText, { color: theme.text }]}>Use System Theme</Text>
           <Switch
             value={isSystemTheme}
             onValueChange={() => setTheme(isSystemTheme ? currentTheme : 'system')}
-            trackColor={{false: '#767577', true: theme.accent}}
-            thumbColor="#f4f3f4"
+            trackColor={{ false: theme.border, true: theme.accent }}
+            thumbColor={theme.background}
           />
         </View>
       </View>
 
-      <Text style={[styles.note, {color: theme.textSecondary}]}>
+      <Text style={[styles.note, { color: theme.textSecondary }]}>
         Changes are applied immediately and saved for your next visit.
       </Text>
     </View>
@@ -83,7 +92,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   optionsContainer: {
-    backgroundColor: 'transparent',
     borderRadius: 8,
     padding: 16,
   },
@@ -92,13 +100,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: 16,
   },
-  selectedOption: {
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-  },
+  selectedOption: {},
   systemThemeContainer: {
     alignItems: 'center',
     flexDirection: 'row',

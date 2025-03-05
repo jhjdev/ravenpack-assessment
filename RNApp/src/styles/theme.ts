@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 // Define the structure of our theme
 export interface ThemeColors {
@@ -9,6 +9,8 @@ export interface ThemeColors {
   cardBackground: string;
   border: string;
   error: string;
+  shadowColor: string;
+  notification: string;
 }
 
 // Define theme colors for light and dark mode
@@ -21,6 +23,8 @@ export const theme: Record<'light' | 'dark', ThemeColors> = {
     cardBackground: '#F2F2F7',
     border: '#E5E5EA',
     error: '#FF3B30',
+    shadowColor: '#000000',
+    notification: '#FF9500',
   },
   dark: {
     background: '#121212',
@@ -30,6 +34,8 @@ export const theme: Record<'light' | 'dark', ThemeColors> = {
     cardBackground: '#1C1C1E',
     border: '#2C2C2E',
     error: '#FF453A',
+    shadowColor: '#000000',
+    notification: '#FFD60A',
   },
 };
 

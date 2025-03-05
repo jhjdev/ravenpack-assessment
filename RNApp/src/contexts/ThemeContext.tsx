@@ -1,5 +1,5 @@
-import React, {createContext, useState, useContext, useEffect, ReactNode} from 'react';
-import {Appearance, ColorSchemeName, useColorScheme} from 'react-native';
+import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import { Appearance, ColorSchemeName, useColorScheme } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Theme types
@@ -24,7 +24,7 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({children}) => {
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // Get device color scheme
   const deviceTheme = useColorScheme();
   const [theme, setThemeState] = useState<ThemeType>('system');
@@ -53,7 +53,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({children}) => {
 
   // Listen for system theme changes
   useEffect(() => {
-    const subscription = Appearance.addChangeListener(({colorScheme}) => {
+    const subscription = Appearance.addChangeListener(({ colorScheme }) => {
       if (theme === 'system') {
         setCurrentTheme(colorScheme === 'dark' ? 'dark' : 'light');
       }
