@@ -1,4 +1,4 @@
-import { apiService } from '../../src/services/api';
+import {apiService} from '../../src/services/api';
 
 describe('API Service', () => {
   // Basic structure tests - verify all required methods exist
@@ -8,11 +8,11 @@ describe('API Service', () => {
       expect(typeof apiService.getPosts).toBe('function');
       expect(typeof apiService.getPost).toBe('function');
       expect(typeof apiService.getPostsByUser).toBe('function');
-      
+
       // Comments API
       expect(typeof apiService.getComments).toBe('function');
       expect(typeof apiService.getCommentsForPost).toBe('function');
-      
+
       // Users API
       expect(typeof apiService.getUsers).toBe('function');
       expect(typeof apiService.getUser).toBe('function');

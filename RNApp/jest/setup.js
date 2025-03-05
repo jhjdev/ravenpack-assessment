@@ -1,10 +1,10 @@
 // Mock global variables used by React Native
 global.window = {};
-global.navigator = { product: 'ReactNative' };
-global.requestAnimationFrame = function(callback) {
+global.navigator = {product: 'ReactNative'};
+global.requestAnimationFrame = function (callback) {
   return setTimeout(callback, 0);
 };
-global.cancelAnimationFrame = function(id) {
+global.cancelAnimationFrame = function (id) {
   clearTimeout(id);
 };
 

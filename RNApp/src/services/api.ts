@@ -223,10 +223,10 @@ class ApiService {
       const message = error.response?.data?.message || defaultMessage;
       const status = error.response?.status;
       console.error(`[API Error] ${status ? `${status}: ` : ''}${message}`);
-      throw { message, status } as ApiError;
+      throw {message, status} as ApiError;
     }
     console.error(`[API Error] ${defaultMessage}:`, error);
-    throw { message: defaultMessage } as ApiError;
+    throw {message: defaultMessage} as ApiError;
   }
 }
 
@@ -258,14 +258,12 @@ export const searchPosts = async (query: string): Promise<Post[]> => {
   try {
     const allPosts = await apiService.getPosts();
     return allPosts.filter(
-      post => 
-        post.title.toLowerCase().includes(query.toLowerCase()) || 
-        post.body.toLowerCase().includes(query.toLowerCase())
+      post =>
+        post.title.toLowerCase().includes(query.toLowerCase()) ||
+        post.body.toLowerCase().includes(query.toLowerCase()),
     );
   } catch (error) {
     console.error('Error searching posts:', error);
-    throw { message: 'Error searching posts' } as ApiError;
+    throw {message: 'Error searching posts'} as ApiError;
   }
 };
-
-

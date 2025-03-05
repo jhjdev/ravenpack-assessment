@@ -1,2 +1,1 @@
-export { PostDetailsScreen } from './PostDetailsScreen';
-
+export {PostDetailsScreen} from './PostDetailsScreen';

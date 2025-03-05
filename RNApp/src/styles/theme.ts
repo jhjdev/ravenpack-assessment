@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 // Define the structure of our theme
 export interface ThemeColors {
@@ -35,17 +35,27 @@ export const theme: Record<'light' | 'dark', ThemeColors> = {
 
 // Common styles that can be reused across the app
 export const commonStyles = StyleSheet.create({
+  card: {
+    borderRadius: 8,
+    marginBottom: 16,
+    padding: 16,
+  },
   container: {
     flex: 1,
+  },
+  row: {
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   screenContainer: {
     flex: 1,
     padding: 16,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
+  smallText: {
+    fontSize: 14,
+  },
+  spaceBetween: {
+    justifyContent: 'space-between',
   },
   subtitle: {
     fontSize: 18,
@@ -55,20 +65,9 @@ export const commonStyles = StyleSheet.create({
   text: {
     fontSize: 16,
   },
-  smallText: {
-    fontSize: 14,
-  },
-  card: {
-    borderRadius: 8,
-    padding: 16,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 16,
   },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  spaceBetween: {
-    justifyContent: 'space-between',
-  },
 });
-
