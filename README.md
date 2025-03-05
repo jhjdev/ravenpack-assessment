@@ -22,12 +22,14 @@ A React Native application built for RavenPack's technical assessment. This app 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/your-username/ravenpack-assessment.git
    cd ravenpack-assessment
    ```
 
 2. Navigate to the React Native app directory:
+
    ```bash
    cd RNApp
    ```
@@ -40,6 +42,7 @@ A React Native application built for RavenPack's technical assessment. This app 
 ### Running on iOS
 
 1. Install CocoaPods dependencies:
+
    ```bash
    cd ios
    pod install
@@ -47,19 +50,23 @@ A React Native application built for RavenPack's technical assessment. This app 
    ```
 
 2. Start the Metro bundler:
+
    ```bash
    npx react-native start
    ```
 
 3. In a new terminal, build and run the iOS app:
+
    ```bash
    npx react-native run-ios
    ```
+
    or
 
-    ```bash
-   PNPM run ios
+   ```bash
+   pnpm run ios
    ```
+
    This will open the app in the iOS simulator.
 
 ### Running on Android
@@ -67,13 +74,15 @@ A React Native application built for RavenPack's technical assessment. This app 
 1. Make sure you have an Android emulator running or a device connected.
 
 2. Start the Metro bundler (if not already running):
+
    ```bash
    npx react-native start
    ```
-    or
 
-    ```bash
-   PNPM run android
+   or
+
+   ```bash
+   pnpm run android
    ```
 
 3. In a new terminal, build and run the Android app:
@@ -120,12 +129,13 @@ npx jest
   cd ..
   npx react-native run-ios
   or
-  PNPM run ios
+  pnpm run ios
   ```
 
 ### Android Issues
 
 - If you have issues with the app not showing icons, make sure the font files are properly included in the assets:
+
   ```bash
   mkdir -p android/app/src/main/assets/fonts
   cp node_modules/react-native-vector-icons/Fonts/Feather.ttf android/app/src/main/assets/fonts/
@@ -138,7 +148,7 @@ npx jest
   cd ..
   npx react-native run-android
   or
-  PNPM run android
+  pnpm run android
   ```
 
 ## License
