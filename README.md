@@ -55,6 +55,11 @@ A React Native application built for RavenPack's technical assessment. This app 
    ```bash
    npx react-native run-ios
    ```
+   or
+
+    ```bash
+   PNPM run ios
+   ```
    This will open the app in the iOS simulator.
 
 ### Running on Android
@@ -64,6 +69,11 @@ A React Native application built for RavenPack's technical assessment. This app 
 2. Start the Metro bundler (if not already running):
    ```bash
    npx react-native start
+   ```
+    or
+
+    ```bash
+   PNPM run android
    ```
 
 3. In a new terminal, build and run the Android app:
