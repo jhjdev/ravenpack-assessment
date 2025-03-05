@@ -109,6 +109,8 @@ npx jest
   xcodebuild clean
   cd ..
   npx react-native run-ios
+  or
+  PNPM run ios
   ```
 
 ### Android Issues
@@ -125,6 +127,8 @@ npx jest
   ./gradlew clean
   cd ..
   npx react-native run-android
+  or
+  PNPM run android
   ```
 
 ## License
