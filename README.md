@@ -61,12 +61,6 @@ A React Native application built for RavenPack's technical assessment. This app 
    npx react-native run-ios
    ```
 
-   or
-
-   ```bash
-   pnpm run ios
-   ```
-
    This will open the app in the iOS simulator.
 
 ### Running on Android
@@ -77,12 +71,6 @@ A React Native application built for RavenPack's technical assessment. This app 
 
    ```bash
    npx react-native start
-   ```
-
-   or
-
-   ```bash
-   pnpm run android
    ```
 
 3. In a new terminal, build and run the Android app:
@@ -128,8 +116,6 @@ npx jest
   xcodebuild clean
   cd ..
   npx react-native run-ios
-  or
-  pnpm run ios
   ```
 
 ### Android Issues
@@ -147,8 +133,6 @@ npx jest
   ./gradlew clean
   cd ..
   npx react-native run-android
-  or
-  pnpm run android
   ```
 
 ## License
