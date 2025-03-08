@@ -82,7 +82,6 @@ A React Native application built for RavenPack's technical assessment. This app 
 ## Project Structure
 
 ```
-RNApp/
 ├── android/                 # Android native code
 ├── ios/                     # iOS native code
 ├── src/
